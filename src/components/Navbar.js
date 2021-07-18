@@ -20,7 +20,7 @@ const Navbar = () => {
           <h2>{current_name}</h2>
         </li>
         <li className="current-time">
-          <h2>16:20</h2>
+          <h2>18:20</h2>
         </li>
       </ul>
     </Wrapper>
@@ -29,6 +29,8 @@ const Navbar = () => {
 
 const Wrapper = styled.section`
   color: var(--white-clr-1);
+  height: 65px;
+  margin-top: 8px;
   width: 75%;
   .logo {
     font-size: 48px;

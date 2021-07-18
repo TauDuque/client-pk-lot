@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const LeftMenu = () => {
   return (
@@ -9,27 +10,41 @@ const LeftMenu = () => {
       </div>
       <hr />
       <ul>
-        <li>Início</li>
+        <Link to="/">
+          <li>Início</li>
+        </Link>
         <hr />
-        <li>Veículos</li>
+        <Link to="/vehicles">
+          <li>Veículos</li>
+        </Link>
         <hr />
-        <li>Preços</li>
+        <Link to="/prices">
+          <li>Preços</li>
+        </Link>
       </ul>
       <hr />
       <h4>Funcionários</h4>
       <hr />
       <ul>
-        <li>Staff</li>
+        <Link to="/staff">
+          <li>Staff</li>
+        </Link>
         <hr />
-        <li>Turnos</li>
+        <Link to="/shifts">
+          <li>Turnos</li>
+        </Link>
         <hr />
-        <li>Aniversários</li>
+        <Link to="/birthdays">
+          <li>Aniversários</li>
+        </Link>
       </ul>
       <hr />
       <ul>
         <li>Fechar o dia</li>
         <hr />
-        <li>Sair</li>
+        <Link to="/starter">
+          <li>Sair</li>
+        </Link>
       </ul>
     </Wrapper>
   );
@@ -53,38 +68,37 @@ const Wrapper = styled.section`
     }
     ul hr {
       border: 2px var(--all-black);
-      width: 113%;
-      margin-left: -13%;
+      width: 100%;
     }
-    hr.separator {
-      border: 2px double var(--all-black);
-      width: 113%;
-      margin-left: -13%;
-    }
+
     ul,
     li {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding-left: 0;
     }
     h4 {
       display: flex;
       justify-content: center;
     }
-    li {
-      margin-left: -13%;
+    li,
+    a {
       cursor: pointer;
+      color: var(--light-black);
+      font-family: var(--thir-font);
     }
     li:hover {
       transform: scale(1.3);
+      color: var(--all-black);
     }
 
     .title {
       justify-content: center;
       display: flex;
       color: var(--all-black);
-      margin-top: 5px;
+      margin-top: 10px;
     }
   }
 `;

@@ -19,7 +19,7 @@ function App() {
         <Navbar />
         <div className="container">
           <div className="row section-center">
-            <div className="col-3 ">
+            <div className="col ">
               <LeftMenu />
             </div>
             <Switch>
@@ -39,9 +39,12 @@ function App() {
                 <Route exact path="/vehicles">
                   <Vehicles />
                 </Route>
+                <Route exact path="/prices">
+                  <Prices />
+                </Route>
               </div>
             </Switch>
-            <div className="col-3 ">
+            <div className="col" style={{ paddingRight: "0" }}>
               <RightMenu />
             </div>
           </div>
