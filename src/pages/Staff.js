@@ -5,6 +5,9 @@ const Staff = () => {
   return <Wrapper></Wrapper>;
 };
 
-const Wrapper = styled.section``;
+const Wrapper = styled.section`
+  @media (min-width: 992px) {
+  }
+`;
 
 export default Staff;
