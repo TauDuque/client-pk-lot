@@ -98,6 +98,11 @@ const Wrapper = styled.section`
       color: var(--all-black);
       margin-top: 10px;
     }
+    .help-section {
+      padding-inline: 5px;
+      padding-top: 5px;
+      line-height: 19px;
+    }
   }
 `;
 

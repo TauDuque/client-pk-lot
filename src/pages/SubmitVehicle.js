@@ -5,7 +5,13 @@ import { Logo } from "../components";
 import { helps } from "../utils";
 
 const SubmitVehicle = () => {
-  const { getName } = useGlobalContext();
+  const {
+    getName,
+    getTotalPrice,
+    calculateVehicles,
+    registerVehicle,
+    vehicles,
+  } = useGlobalContext();
   const description = helps.find((desc) => desc.id === "SubmitVehicle");
   const { title, help } = description;
 
@@ -19,12 +25,6 @@ const SubmitVehicle = () => {
   const [type, setType] = useState("");
   const [time, setTime] = useState("");
 
-  console.log(name);
-  console.log(idNum);
-  console.log(phone);
-  console.log(type);
-  console.log(time);
-
   function submitHandler(e) {
     e.preventDefault();
     if (
@@ -36,9 +36,44 @@ const SubmitVehicle = () => {
     ) {
       return alert("Favor preencher todos os campos!");
     } else {
-      console.log("match");
+      const price = registerVehicle(name, idNum, phone, type, time);
     }
   }
+
+  function getPrice() {
+    const carPrice = 20;
+    const carHour = 8;
+    const motoPrice = 10;
+    const motoHour = 4;
+    if (type === "carro" && time == 1) {
+      let firstPrice = carPrice;
+      let secondPrice = 0;
+      getTotalPrice(firstPrice, secondPrice);
+    }
+    if (type === "carro" && time > 1) {
+      let firstPrice = carPrice;
+      const counting = time * carHour;
+      let secondPrice = counting - carHour;
+      getTotalPrice(firstPrice, secondPrice);
+    }
+    if (type === "moto" && time == 1) {
+      let firstPrice = motoPrice;
+      let secondPrice = 0;
+      getTotalPrice(firstPrice, secondPrice);
+    }
+    if (type === "moto" && time > 1) {
+      let firstPrice = motoPrice;
+      const counting = time * motoHour;
+      let secondPrice = counting - motoHour;
+      getTotalPrice(firstPrice, secondPrice);
+    }
+  }
+
+  function getSinglePrice(a, b) {
+    return a + b;
+  }
+
+  console.log(getSinglePrice(20, 20));
 
   return (
     <Wrapper className="section">
@@ -81,7 +116,7 @@ const SubmitVehicle = () => {
           <div className="form-group row m-4">
             <div
               className="form-check form-check-inline col"
-              style={{ marginLeft: "12px" }}
+              style={{ marginLeft: "120px" }}
             >
               <input
                 className="form-check-input"
@@ -101,7 +136,7 @@ const SubmitVehicle = () => {
                 type="radio"
                 name="inlineRadioOptions"
                 id="inlineRadio2"
-                value="Moto"
+                value="moto"
                 onChange={(e) => setType(e.target.value)}
               />
               <label className="form-check-label" htmlFor="inlineRadio2">
@@ -111,7 +146,7 @@ const SubmitVehicle = () => {
           </div>
           <div className="time-form">
             <label htmlFor="basic-url" className="form-label">
-              Tempo de Peranência:
+              Tempo de Permanência:
             </label>
             <input
               type="number"

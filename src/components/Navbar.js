@@ -3,10 +3,13 @@ import styled from "styled-components";
 import { GiHomeGarage } from "react-icons/gi";
 import { useGlobalContext } from "../context";
 import { TiThMenuOutline } from "react-icons/ti";
+import moment from "moment";
 
 const Navbar = () => {
   const { description } = useGlobalContext();
   const { current_name } = description;
+
+  const currentTime = moment(new Date()).format("HH:mm");
 
   return (
     <Wrapper>
@@ -21,7 +24,7 @@ const Navbar = () => {
           <h2>{current_name}</h2>
         </li>
         <li className="current-time">
-          <h2>18:20</h2>
+          <h2>{currentTime}</h2>
         </li>
       </ul>
     </Wrapper>

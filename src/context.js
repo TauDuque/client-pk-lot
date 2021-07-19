@@ -9,6 +9,10 @@ import {
   GET_SINGLE_VEHICLE_START,
   GET_SINGLE_VEHICLE_SUCCESS,
   GETTING_NAME,
+  GET_TOTAL_PRICE,
+  CALCULATE_VACANCIES,
+  CALCULATE_VEHICLES,
+  SUBMIT_VEHICLE,
 } from "./action";
 
 const initialState = {
@@ -21,7 +25,7 @@ const initialState = {
   },
   current_value: 0,
   current_vehicles: 0,
-  vacancies: 56,
+  free_vacancies: 56,
 };
 
 const AppContext = React.createContext();
@@ -33,8 +37,39 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GETTING_NAME, payload: { title, help } });
   };
 
+  const getTotalPrice = (firstPrice, secondPrice) => {
+    dispatch({
+      type: GET_TOTAL_PRICE,
+      payload: { firstPrice, secondPrice },
+    });
+  };
+
+  const calculateVacancies = (occupied) => {
+    dispatch({ type: CALCULATE_VACANCIES, payload: { occupied } });
+  };
+
+  const calculateVehicles = (value) => {
+    dispatch({ type: CALCULATE_VEHICLES, payload: value });
+  };
+
+  const registerVehicle = (name, idNum, phone, type, time) => {
+    dispatch({
+      type: SUBMIT_VEHICLE,
+      payload: { name, idNum, phone, type, time },
+    });
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, getName }}>
+    <AppContext.Provider
+      value={{
+        ...state,
+        getName,
+        getTotalPrice,
+        calculateVacancies,
+        calculateVehicles,
+        registerVehicle,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

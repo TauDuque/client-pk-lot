@@ -32,6 +32,17 @@ export const helps = [
   {
     id: "Accounts",
     title: "Fechamento do Dia",
-    help: "Confira os valores arrecadados nas últimas 24h de atendimento.",
+    help: "Confira os valores arrecadados nas últimas 24h de",
   },
 ];
+
+function getSinglePrice(a, b) {
+  const carPrice = 20;
+  const carHour = 8;
+  const motoPrice = 10;
+  const motoHour = 4;
+  if (a === "carro" && b == 1) {
+    let firstPrice = carPrice;
+    let secondPrice = 0;
+  }
+}

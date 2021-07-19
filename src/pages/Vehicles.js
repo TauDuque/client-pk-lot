@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../context";
-import {
-  GiCarKey,
-  GiFullMotorcycleHelmet,
-  GiCheckeredFlag,
-} from "react-icons/gi";
+
 import { Logo } from "../components";
 import { helps } from "../utils";
 
@@ -20,33 +16,12 @@ const Vehicles = () => {
   return (
     <Wrapper className="section">
       <Logo />
-      <div className="vehicle-info">
-        <h5>Carros:</h5>
-        <h2>8</h2>
-        <span>
-          <GiCarKey className="vehicle-icn" />
-        </span>
-      </div>
-      <div className="vehicle-info">
-        <h5>Motos:</h5>
-        <h2>4</h2>
-        <span>
-          <GiFullMotorcycleHelmet className="vehicle-icn" />
-        </span>
-      </div>
-      <div className="vehicle-info">
-        <h5>Vagas:</h5>
-        <h2>44</h2>
-        <span>
-          <GiCheckeredFlag className="vehicle-icn" />
-        </span>
-      </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
-  .vehicle-info {
+  .home-info {
     display: flex;
     gap: 75px;
     align-items: center;
