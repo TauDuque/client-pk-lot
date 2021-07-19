@@ -7,5 +7,5 @@ export const GET_VEHICLES_SUCCESS = "GET_VEHICLES_SUCCESS";
 // single api manager
 export const GET_SINGLE_VEHICLE_START = "GET_VEHICLES_START";
 export const GET_SINGLE_VEHICLE_SUCCESS = "GET_VEHICLES_SUCCESS";
-//teste
-export const TESTING_NAME = "TESTING_NAME";
+// get page name and help text
+export const GETTING_NAME = "GETTING_NAME";

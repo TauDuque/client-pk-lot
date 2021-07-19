@@ -8,15 +8,17 @@ import {
   GET_VEHICLES_SUCCESS,
   GET_SINGLE_VEHICLE_START,
   GET_SINGLE_VEHICLE_SUCCESS,
-  TESTING_NAME,
+  GETTING_NAME,
 } from "./action";
 
 const initialState = {
   is_loading: false,
   vehicles: [],
   single_vehicle: {},
-  current_name: "",
-  help_text: "",
+  description: {
+    current_name: "",
+    help_text: "",
+  },
   current_value: 0,
   current_vehicles: 0,
   vacancies: 56,
@@ -27,8 +29,8 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const getName = (name) => {
-    dispatch({ type: TESTING_NAME, payload: name });
+  const getName = (title, help) => {
+    dispatch({ type: GETTING_NAME, payload: { title, help } });
   };
 
   return (

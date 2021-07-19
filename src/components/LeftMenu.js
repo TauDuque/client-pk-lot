@@ -40,7 +40,9 @@ const LeftMenu = () => {
       </ul>
       <hr />
       <ul>
-        <li>Fechar o dia</li>
+        <Link to="/accounts">
+          <li>Fechar o dia</li>
+        </Link>
         <hr />
         <Link to="/starter">
           <li>Sair</li>

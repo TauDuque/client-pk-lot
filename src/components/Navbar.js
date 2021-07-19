@@ -5,7 +5,8 @@ import { useGlobalContext } from "../context";
 import { TiThMenuOutline } from "react-icons/ti";
 
 const Navbar = () => {
-  const { current_name } = useGlobalContext();
+  const { description } = useGlobalContext();
+  const { current_name } = description;
 
   return (
     <Wrapper>

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { coins_icn, pklot_icn, count_icn } from "../assets";
+import { useGlobalContext } from "../context";
 
 const RightMenu = () => {
+  const { description } = useGlobalContext();
+  const { help_text } = description;
+
   return (
     <Wrapper>
       <div className="title">
@@ -43,10 +47,7 @@ const RightMenu = () => {
         </ul>
       </div>
       <div className="help-section">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-          eaque expedita in aliquam?
-        </p>
+        <p>{help_text}</p>
       </div>
     </Wrapper>
   );

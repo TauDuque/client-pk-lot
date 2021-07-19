@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../context";
 import { Logo } from "../components";
+import { helps } from "../utils";
 
 const Home = () => {
   const { getName } = useGlobalContext();
+  const description = helps.find((desc) => desc.id === "Home");
+  const { title, help } = description;
 
   useEffect(() => {
-    getName("Home");
+    getName(title, help);
   }, []);
 
   return (
