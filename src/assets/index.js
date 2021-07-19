@@ -9,6 +9,9 @@ import car_icn from "./car_icn.png";
 import coins_icn from "./coins_icn.png";
 import pklot_icn from "./pklot_icn.png";
 import count_icn from "./count_icn.png";
+import main_logo from "./main_logo.png";
+import worker_icn from "./worker_icn.png";
+import worker_icn_2 from "./worker_icn-2.png";
 
 export {
   pklot_1,
@@ -22,4 +25,7 @@ export {
   coins_icn,
   pklot_icn,
   count_icn,
+  main_logo,
+  worker_icn,
+  worker_icn_2,
 };

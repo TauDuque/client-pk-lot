@@ -16,7 +16,7 @@ const Navbar = () => {
         <li className="menu-icon">
           <TiThMenuOutline />
         </li>
-        <li className="current-name">
+        <li className="current-name" style={{ marginLeft: "90px" }}>
           <h2>{current_name}</h2>
         </li>
         <li className="current-time">
@@ -53,12 +53,14 @@ const Wrapper = styled.section`
   }
 
   @media (min-width: 992px) {
-    width: 75%;
+    width: 69%;
+    margin-left: 25px;
     ul {
       display: flex;
       position: relative;
       justify-content: space-between;
       padding-top: 15px;
+      padding-left: 0;
     }
     .menu-icon {
       display: none;

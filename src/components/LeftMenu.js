@@ -18,8 +18,8 @@ const LeftMenu = () => {
           <li>Veículos</li>
         </Link>
         <hr />
-        <Link to="/prices">
-          <li>Preços</li>
+        <Link to="/submitvehicle">
+          <li>Cadastrar Veículo</li>
         </Link>
       </ul>
       <hr />

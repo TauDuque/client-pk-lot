@@ -17,6 +17,9 @@ const initialState = {
   single_vehicle: {},
   current_name: "",
   help_text: "",
+  current_value: 0,
+  current_vehicles: 0,
+  vacancies: 56,
 };
 
 const AppContext = React.createContext();

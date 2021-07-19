@@ -5,7 +5,7 @@ import {
   Accounts,
   Birthdays,
   Home,
-  Prices,
+  SubmitVehicle,
   Shifts,
   Staff,
   Starter,
@@ -17,7 +17,7 @@ function App() {
     <div className="main-container">
       <Router>
         <Navbar />
-        <div className="container">
+        <div className="container" style={{ display: "flex" }}>
           <div className="row section-center">
             <div className="col ">
               <LeftMenu />
@@ -39,8 +39,11 @@ function App() {
                 <Route exact path="/vehicles">
                   <Vehicles />
                 </Route>
-                <Route exact path="/prices">
-                  <Prices />
+                <Route exact path="/staff">
+                  <Staff />
+                </Route>
+                <Route exact path="/submitvehicle">
+                  <SubmitVehicle />
                 </Route>
               </div>
             </Switch>

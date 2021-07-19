@@ -186,8 +186,8 @@ p {
     var(--white-clr-3) 0%,
     var(--white-clr-2) 100%
   );
-  border-image-slice: 1;
   color: var(--all-black);
+  border-image-slice: 1;
   padding: 10px 55px;
 }
 .effect.box-fill-skew:after {
@@ -221,8 +221,11 @@ p {
 
 /* section */
 .section {
-  padding: 5rem 0;
+  padding-top: 15px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .section-center {
