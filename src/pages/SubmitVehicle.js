@@ -2,9 +2,16 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../context";
 import { Logo } from "../components";
+import { helps } from "../utils";
 
 const SubmitVehicle = () => {
   const { getName } = useGlobalContext();
+  const description = helps.find((desc) => desc.id === "SubmitVehicle");
+  const { title, help } = description;
+
+  useEffect(() => {
+    getName(title, help);
+  }, []);
 
   const [name, setName] = useState("");
   const [idNum, setIdNum] = useState("");
@@ -12,11 +19,26 @@ const SubmitVehicle = () => {
   const [type, setType] = useState("");
   const [time, setTime] = useState("");
 
-  useEffect(() => {
-    getName("Cadastrar Veículos");
-  }, []);
+  console.log(name);
+  console.log(idNum);
+  console.log(phone);
+  console.log(type);
+  console.log(time);
 
-  function submitHandler() {}
+  function submitHandler(e) {
+    e.preventDefault();
+    if (
+      name === "" ||
+      idNum === "" ||
+      phone === "" ||
+      type === "" ||
+      time === ""
+    ) {
+      return alert("Favor preencher todos os campos!");
+    } else {
+      console.log("match");
+    }
+  }
 
   return (
     <Wrapper className="section">
@@ -27,7 +49,13 @@ const SubmitVehicle = () => {
             <label htmlFor="basic-url" className="form-label">
               Nome Completo:
             </label>
-            <input type="text" className="form-control" id="basic-url" />
+            <input
+              type="text"
+              className="form-control"
+              id="basic-url"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
           <div className="row m-3">
             <div className="col">
@@ -35,8 +63,9 @@ const SubmitVehicle = () => {
                 type="text"
                 className="form-control"
                 placeholder="Identidade"
-                aria-label="Identidad"
                 aria-required
+                value={idNum}
+                onChange={(e) => setIdNum(e.target.value)}
               />
             </div>
             <div className="col">
@@ -44,7 +73,8 @@ const SubmitVehicle = () => {
                 type="text"
                 className="form-control"
                 placeholder="Telefone"
-                aria-label="Telefone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
           </div>
@@ -58,7 +88,8 @@ const SubmitVehicle = () => {
                 type="radio"
                 name="inlineRadioOptions"
                 id="inlineRadio1"
-                value="Carro"
+                value="carro"
+                onChange={(e) => setType(e.target.value)}
               />
               <label className="form-check-label" htmlFor="inlineRadio1">
                 Carro
@@ -71,6 +102,7 @@ const SubmitVehicle = () => {
                 name="inlineRadioOptions"
                 id="inlineRadio2"
                 value="Moto"
+                onChange={(e) => setType(e.target.value)}
               />
               <label className="form-check-label" htmlFor="inlineRadio2">
                 Moto
@@ -81,7 +113,13 @@ const SubmitVehicle = () => {
             <label htmlFor="basic-url" className="form-label">
               Tempo de Peranência:
             </label>
-            <input type="number" min="1" max="48" />
+            <input
+              type="number"
+              min="1"
+              max="48"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+            />
           </div>
           <div className="submit-btn">
             <button type="submit" className="effect box-fill-skew">

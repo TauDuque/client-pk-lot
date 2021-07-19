@@ -2,13 +2,20 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../context";
 import { Logo } from "../components";
-import { workers_staff } from "../utils";
+import { workers_staff, helps } from "../utils";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const Staff = () => {
   const { getName } = useGlobalContext();
   const [page, setPage] = useState(0);
-  console.log(page);
+
+  const description = helps.find((desc) => desc.id === "Staff");
+  const { title, help } = description;
+
+  useEffect(() => {
+    getName(title, help);
+  }, []);
+
   function NextWorker() {
     if (page === 8) {
       setPage(0);
@@ -26,10 +33,6 @@ const Staff = () => {
   }
 
   const data = workers_staff[page];
-
-  useEffect(() => {
-    getName("Staff");
-  }, []);
 
   const { name, adress, birthday, job, icon } = data;
 
@@ -68,6 +71,7 @@ const Staff = () => {
 };
 
 const Wrapper = styled.section`
+  text-transform: capitalize;
   span {
     padding-right: 8px;
   }

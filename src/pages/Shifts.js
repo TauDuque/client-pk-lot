@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../context";
 import { Logo } from "../components";
-import { workers_staff } from "../utils";
+import { workers_staff, helps } from "../utils";
 
 const Shift = () => {
   const { getName } = useGlobalContext();
+  const description = helps.find((desc) => desc.id === "Shift");
+  const { title, help } = description;
 
   useEffect(() => {
-    getName("Turnos");
+    getName(title, help);
   }, []);
 
   return (

@@ -7,12 +7,15 @@ import {
   GiCheckeredFlag,
 } from "react-icons/gi";
 import { Logo } from "../components";
+import { helps } from "../utils";
 
 const Vehicles = () => {
   const { getName } = useGlobalContext();
+  const description = helps.find((desc) => desc.id === "Vehicles");
+  const { title, help } = description;
 
   useEffect(() => {
-    getName("Veículos Estacionados");
+    getName(title, help);
   }, []);
   return (
     <Wrapper className="section">
