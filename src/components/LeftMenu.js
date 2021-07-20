@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const LeftMenu = () => {
   return (
-    <Wrapper>
+    <Wrapper className="menu">
       <div className="title">
         <h2>Menu</h2>
       </div>
@@ -53,6 +53,9 @@ const LeftMenu = () => {
 };
 
 const Wrapper = styled.section`
+  .menu {
+    display: none;
+  }
   @media (min-width: 992px) {
     margin-top: 2px;
     margin-bottom: 0;

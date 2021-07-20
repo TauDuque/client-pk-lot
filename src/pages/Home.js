@@ -10,34 +10,39 @@ import {
 import { helps } from "../utils";
 
 const Home = () => {
-  const { getName } = useGlobalContext();
+  const { getName, free_vacancies, vehicles } = useGlobalContext();
   const description = helps.find((desc) => desc.id === "Home");
   const { title, help } = description;
+
+  const carTotal = vehicles.filter((item) => item.type === "carro");
+  const motoTotal = vehicles.length - carTotal.length;
 
   useEffect(() => {
     getName(title, help);
   }, []);
+
+  console.log(vehicles.length);
 
   return (
     <Wrapper className="section">
       <Logo />
       <div className="home-info">
         <h5>Carros:</h5>
-        <h2>8</h2>
+        <h2>{carTotal.length}</h2>
         <span>
           <GiCarKey className="home-icn" />
         </span>
       </div>
       <div className="home-info">
         <h5>Motos:</h5>
-        <h2>4</h2>
+        <h2>{motoTotal}</h2>
         <span>
           <GiFullMotorcycleHelmet className="home-icn" />
         </span>
       </div>
       <div className="home-info">
         <h5>Vagas:</h5>
-        <h2>44</h2>
+        <h2>{free_vacancies - vehicles.length}</h2>
         <span>
           <GiCheckeredFlag className="home-icn" />
         </span>

@@ -5,6 +5,8 @@ import Loading from "./Loading";
 import TableAccount from "./TableAccount";
 import Navbar from "./Navbar";
 import Logo from "./Logo";
+import OnSubmit from "./OnSubmit";
+import SubmitedForm from "./SubmitedForm";
 
 export {
   HelpSection,
@@ -14,4 +16,6 @@ export {
   TableAccount,
   Navbar,
   Logo,
+  OnSubmit,
+  SubmitedForm,
 };

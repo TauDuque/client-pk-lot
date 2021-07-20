@@ -59,6 +59,7 @@ const Wrapper = styled.section`
     padding-right: 8px;
   }
   .birthdays-info {
+    margin-top: -15px;
     border: 1px solid var(--vanilla);
     display: flex;
     align-items: center;

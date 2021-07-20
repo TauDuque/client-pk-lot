@@ -136,7 +136,7 @@ p {
 }
 /*  global classes */
 
-/* Button Style and Effect */
+/*Primary Button Style and Effect */
 
 .effect {
   -webkit-transition: all 0.2s ease-out;
@@ -219,6 +219,26 @@ p {
   overflow: hidden;
 }
 
+/*  Secondary Button Style */
+.submit-btn {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.submit-btn button {
+  color: var(--coral-red);
+  border: 1px solid var(--vanilla);
+}
+.submit-btn button:hover {
+  border: 1px solid var(--coral-red);
+  color: var(--white-clr-1);
+  background: var(--red-wine);
+}
+.submit-btn button:hover:after {
+  background: var(--wine-red);
+}
+
 /* section */
 .section {
   padding-top: 15px;
@@ -243,6 +263,9 @@ p {
   align-items: center;
   height: 850px;
   width: 535px;
+}
+.menu {
+  display: none;
 }
 
 @media screen and (min-width: 992px) {

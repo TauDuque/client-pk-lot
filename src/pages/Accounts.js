@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../context";
 import { Logo } from "../components";
-import { helps } from "../utils";
+import { helps, reducerMethod } from "../utils";
 
 const Accounts = () => {
-  const { getName } = useGlobalContext();
+  const { getName, vehicles } = useGlobalContext();
   const description = helps.find((desc) => desc.id === "Accounts");
   const { title, help } = description;
+
+  const calculateValue = vehicles.map((item) => item.singlePrice);
+
+  const finalValue = calculateValue.reduce(reducerMethod);
 
   useEffect(() => {
     getName(title, help);
@@ -19,15 +23,15 @@ const Accounts = () => {
       <div className="accounts-info">
         <div className="col-info">
           <span>Total de Veículos:</span>
-          <h3>VALOR</h3>
+          <h3>{vehicles.length}</h3>
         </div>
         <div className="col-info">
           <span>Valor Total do Dia:</span>
-          <h3>VALOR</h3>
+          <h3>R${finalValue}</h3>
         </div>
         <div className="col-info">
           <span>Valor Total do Mês:</span>
-          <h3>VALOR</h3>
+          <h3>R${8400 + finalValue}</h3>
         </div>
       </div>
     </Wrapper>

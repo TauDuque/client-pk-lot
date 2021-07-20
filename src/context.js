@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useReducer } from "react";
 import reducer from "./reducer";
+import { localdata } from "./utils";
 
 import {
   START_LOADING,
@@ -10,21 +11,17 @@ import {
   GET_SINGLE_VEHICLE_SUCCESS,
   GETTING_NAME,
   GET_TOTAL_PRICE,
-  CALCULATE_VACANCIES,
-  CALCULATE_VEHICLES,
   SUBMIT_VEHICLE,
 } from "./action";
 
 const initialState = {
   is_loading: false,
-  vehicles: [],
+  vehicles: localdata,
   single_vehicle: {},
   description: {
     current_name: "",
     help_text: "",
   },
-  current_value: 0,
-  current_vehicles: 0,
   free_vacancies: 56,
 };
 
@@ -44,19 +41,29 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  const calculateVacancies = (occupied) => {
+  /* const calculateVacancies = (occupied) => {
     dispatch({ type: CALCULATE_VACANCIES, payload: { occupied } });
   };
 
   const calculateVehicles = (value) => {
     dispatch({ type: CALCULATE_VEHICLES, payload: value });
-  };
+  }; */
 
-  const registerVehicle = (name, idNum, phone, type, time) => {
+  const registerVehicle = (id, name, idNum, phone, type, time, singlePrice) => {
     dispatch({
       type: SUBMIT_VEHICLE,
-      payload: { name, idNum, phone, type, time },
+      payload: { id, name, idNum, phone, type, time, singlePrice },
     });
+  };
+
+  const singleVehicle = (id) => {
+    dispatch({ type: GET_VEHICLES_START });
+    try {
+      const singleData = localdata;
+      dispatch({ type: GET_VEHICLES_SUCCESS, payload: { id, singleData } });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -65,8 +72,9 @@ const AppProvider = ({ children }) => {
         ...state,
         getName,
         getTotalPrice,
-        calculateVacancies,
-        calculateVehicles,
+        singleVehicle,
+        /*  calculateVacancies,
+        calculateVehicles, */
         registerVehicle,
       }}
     >

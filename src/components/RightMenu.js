@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { coins_icn, pklot_icn, count_icn } from "../assets";
 import { useGlobalContext } from "../context";
+import { reducerMethod } from "../utils";
 
 const RightMenu = () => {
-  const { description } = useGlobalContext();
+  const { description, vehicles } = useGlobalContext();
   const { help_text } = description;
 
+  const calculateValue = vehicles.map((item) => item.singlePrice);
+
+  const finalValue = calculateValue.reduce(reducerMethod);
+
   return (
-    <Wrapper>
+    <Wrapper className="menu">
       <div className="title">
         <h2>Contas</h2>
       </div>
@@ -16,30 +21,30 @@ const RightMenu = () => {
         <ul>
           <li>
             <span>
-              Saldo
+              Saldo/
               <br /> 24h
             </span>
-            <span>R$148,50</span>
+            <span>R${finalValue}</span>
             <span>
               <img src={coins_icn} alt="ícone" />
             </span>
           </li>
           <li>
             <span>
-              Saldo <br />
+              Saldo/ <br />
               30d
             </span>
-            <span>418,00</span>
+            <span>R${8400 + finalValue}</span>
             <span>
               <img src={count_icn} alt="ícone" />
             </span>
           </li>
           <li>
             <span>
-              Carros <br />
+              Veículos/ <br />
               24h
             </span>
-            <span>14</span>
+            <span>{vehicles.length}</span>
             <span>
               <img src={pklot_icn} alt="ícone" />
             </span>
@@ -54,6 +59,9 @@ const RightMenu = () => {
 };
 
 const Wrapper = styled.section`
+  .menu {
+    display: none;
+  }
   @media (min-width: 992px) {
     margin-top: 2px;
     margin-bottom: 0;

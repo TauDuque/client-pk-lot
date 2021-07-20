@@ -7,8 +7,8 @@ import {
   GET_SINGLE_VEHICLE_SUCCESS,
   GETTING_NAME,
   GET_TOTAL_PRICE,
-  CALCULATE_VACANCIES,
-  CALCULATE_VEHICLES,
+  /* CALCULATE_VACANCIES,
+  CALCULATE_VEHICLES, */
   SUBMIT_VEHICLE,
 } from "./action";
 
@@ -17,7 +17,17 @@ const reducer = (state, action) => {
     const { title, help } = action.payload;
     return { ...state, description: { current_name: title, help_text: help } };
   }
-  if (action.type === GET_TOTAL_PRICE) {
+
+  if (action.type === GET_VEHICLES_START) {
+    return { ...state, is_loading: true };
+  }
+
+  if (action.type === GET_VEHICLES_SUCCESS) {
+    const { id, singleData } = action.payload;
+    const singleV = singleData.find((item) => item.id === id);
+    return { ...state, is_loading: false, single_vehicle: singleV };
+  }
+  /*  if (action.type === GET_TOTAL_PRICE) {
     if (state.current_value == 0) {
       const { firstPrice, secondPrice } = action.payload;
       return {
@@ -29,8 +39,8 @@ const reducer = (state, action) => {
       const newValue = firstPrice + secondPrice;
       return { ...state, current_value: state.current_value + newValue };
     }
-  }
-  if (action.type === CALCULATE_VACANCIES) {
+  } */
+  /*   if (action.type === CALCULATE_VACANCIES) {
     const { occupied } = action.payload;
     return { ...state, free_vacancies: state.free_vacancies - occupied };
   }
@@ -46,14 +56,15 @@ const reducer = (state, action) => {
         ...state,
         current_vehicles: action.payload,
       };
-  }
+  } */
 
   if (action.type === SUBMIT_VEHICLE) {
     const tempItem = state.vehicles.map((item) => item);
     if (tempItem) {
       const newItem = action.payload;
-      return { ...state, vehicles: [...state.vehicles, newItem] };
-    } else return { ...state, vehicles: [action.payload] };
+      const totalItems = tempItem.concat(newItem);
+      return { ...state, vehicles: totalItems };
+    } else return { ...state, vehicles: action.payload };
   }
 
   throw new Error(`No Matching "${action.type}" - action type`);

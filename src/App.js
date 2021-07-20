@@ -1,5 +1,12 @@
 import React from "react";
-import { Loading, LeftMenu, RightMenu, Navbar } from "./components";
+import {
+  Loading,
+  LeftMenu,
+  RightMenu,
+  Navbar,
+  OnSubmit,
+  SubmitedForm,
+} from "./components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
   Accounts,
@@ -8,6 +15,7 @@ import {
   SubmitVehicle,
   Shifts,
   Staff,
+  SingleVehicle,
   Starter,
   Vehicles,
 } from "./pages";
@@ -39,11 +47,22 @@ function App() {
                 <Route exact path="/vehicles">
                   <Vehicles />
                 </Route>
+                <Route
+                  extac
+                  path="/vehicles/:id"
+                  children={<SingleVehicle />}
+                />
                 <Route exact path="/staff">
                   <Staff />
                 </Route>
                 <Route exact path="/submitvehicle">
                   <SubmitVehicle />
+                </Route>
+                <Route exact path="/onsubmit">
+                  <OnSubmit />
+                </Route>
+                <Route exact path="/submitedform">
+                  <SubmitedForm />
                 </Route>
               </div>
             </Switch>

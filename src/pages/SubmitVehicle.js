@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 import { useGlobalContext } from "../context";
 import { Logo } from "../components";
-import { helps } from "../utils";
+import { helps, getSinglePrice, generateId } from "../utils";
 
 const SubmitVehicle = () => {
   const {
     getName,
-    getTotalPrice,
-    calculateVehicles,
+
     registerVehicle,
-    vehicles,
   } = useGlobalContext();
   const description = helps.find((desc) => desc.id === "SubmitVehicle");
   const { title, help } = description;
+  const history = useHistory();
 
   useEffect(() => {
     getName(title, help);
@@ -36,11 +36,16 @@ const SubmitVehicle = () => {
     ) {
       return alert("Favor preencher todos os campos!");
     } else {
-      const price = registerVehicle(name, idNum, phone, type, time);
+      const singlePrice = getSinglePrice(type, time);
+
+      const id = generateId();
+      registerVehicle(id, name, idNum, phone, type, time, singlePrice);
+
+      history.push("/onsubmit");
     }
   }
 
-  function getPrice() {
+  /*   function getPrice() {
     const carPrice = 20;
     const carHour = 8;
     const motoPrice = 10;
@@ -67,13 +72,7 @@ const SubmitVehicle = () => {
       let secondPrice = counting - motoHour;
       getTotalPrice(firstPrice, secondPrice);
     }
-  }
-
-  function getSinglePrice(a, b) {
-    return a + b;
-  }
-
-  console.log(getSinglePrice(20, 20));
+  } */
 
   return (
     <Wrapper className="section">
@@ -157,7 +156,11 @@ const SubmitVehicle = () => {
             />
           </div>
           <div className="submit-btn">
-            <button type="submit" className="effect box-fill-skew">
+            <button
+              type="submit"
+              className="effect box-fill-skew"
+              style={{ border: "1px solid var(--wine-purple)" }}
+            >
               Cadastrar
             </button>
           </div>
@@ -186,24 +189,6 @@ const Wrapper = styled.section`
     display: flex;
     width: 85px;
     padding-inline-start: 32px;
-  }
-  .submit-btn {
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .submit-btn button {
-    color: var(--coral-red);
-    border: 1px solid var(--vanilla);
-  }
-  .submit-btn button:hover {
-    border: 1px solid var(--coral-red);
-    color: var(--white-clr-1);
-    background: var(--red-wine);
-  }
-  .submit-btn button:hover:after {
-    background: var(--wine-red);
   }
 
   @media (min-width: 992px) {

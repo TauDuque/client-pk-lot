@@ -6,6 +6,7 @@ import Shifts from "./Shifts";
 import Staff from "./Staff";
 import Starter from "./Starter";
 import Vehicles from "./Vehicles";
+import SingleVehicle from "./SingleVehicle";
 
 export {
   Accounts,
@@ -16,4 +17,5 @@ export {
   Staff,
   Starter,
   Vehicles,
+  SingleVehicle,
 };

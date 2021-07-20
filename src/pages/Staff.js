@@ -76,6 +76,7 @@ const Wrapper = styled.section`
     padding-right: 8px;
   }
   .staff-info {
+    margin-top: -15px;
     display: flex;
     align-items: center;
     flex-direction: column;
