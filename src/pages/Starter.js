@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AliceCarousel from "react-alice-carousel";
+import { Link } from "react-router-dom";
+import { useGlobalContext } from "../context";
 import "react-alice-carousel/lib/alice-carousel.css";
 import {
   pklot_1,
@@ -13,6 +15,8 @@ import {
 } from "../assets";
 
 const Starter = () => {
+  const { loaderShow, displayHandlerHide, displayHandlerShow } =
+    useGlobalContext();
   const [width, setWidth] = useState(true);
   const items = [
     <img src={pklot_1} alt="estacionamento" />,
@@ -34,6 +38,11 @@ const Starter = () => {
   useEffect(() => {
     widthHandler();
   }, []);
+
+  function btnHandler() {
+    loaderShow();
+    displayHandlerShow();
+  }
 
   return (
     <Wrapper>
@@ -58,16 +67,22 @@ const Starter = () => {
         </div>
       )}
       <div className="access-btn">
-        <button className="effect box-fill-skew" type="button">
-          Acessar
-        </button>
+        <Link to="/">
+          <button
+            className="effect box-fill-skew"
+            type="button"
+            onClick={() => btnHandler()}
+          >
+            Acessar
+          </button>
+        </Link>
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
-  height: 58vh;
+  height: 54vh;
   width: 50vw;
   display: flex;
   flex-direction: column;
@@ -75,6 +90,7 @@ const Wrapper = styled.section`
   align-items: center;
   h2 {
     display: flex;
+    margin-top: 8px;
     justify-content: center;
     color: var(--white-clr-1);
   }
@@ -91,7 +107,7 @@ const Wrapper = styled.section`
   }
 
   @media (min-width: 992px) {
-    height: 84vh;
+    height: 92vh;
     width: 50vw;
     justify-content: flex-end;
     position: relative;

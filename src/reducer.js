@@ -1,6 +1,6 @@
 import {
   START_LOADING,
-  STOPT_LOADING,
+  STOP_LOADING,
   GET_VEHICLES_START,
   GET_VEHICLES_SUCCESS,
   GET_SINGLE_VEHICLE_START,
@@ -9,10 +9,28 @@ import {
   GET_TOTAL_PRICE,
   /* CALCULATE_VACANCIES,
   CALCULATE_VEHICLES, */
+  HIDE_ALL,
+  SHOW_ALL,
   SUBMIT_VEHICLE,
 } from "./action";
 
 const reducer = (state, action) => {
+  if (action.type === HIDE_ALL) {
+    return { ...state, site_display: false };
+  }
+
+  if (action.type === SHOW_ALL) {
+    return { ...state, site_display: true };
+  }
+
+  if (action.type === STOP_LOADING) {
+    return { ...state, is_loading: false };
+  }
+
+  if (action.type === START_LOADING) {
+    return { ...state, is_loading: true };
+  }
+
   if (action.type === GETTING_NAME) {
     const { title, help } = action.payload;
     return { ...state, description: { current_name: title, help_text: help } };

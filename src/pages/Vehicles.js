@@ -31,7 +31,9 @@ const Vehicles = () => {
     getName(title, help);
   }, []);
 
-  if (data) {
+  if (!data) {
+    return <Loading />;
+  } else
     return (
       <Wrapper className="section">
         <Logo />
@@ -87,7 +89,6 @@ const Vehicles = () => {
         </div>
       </Wrapper>
     );
-  } else return <Loading />;
 };
 
 const Wrapper = styled.section`

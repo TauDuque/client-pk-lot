@@ -1,53 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+
+import { Link, useHistory } from "react-router-dom";
 
 const LeftMenu = () => {
+  const history = useHistory();
+
+  function btnHandler() {
+    history.push("/leaving");
+  }
+
   return (
-    <Wrapper className="menu">
-      <div className="title">
-        <h2>Menu</h2>
+    <Wrapper>
+      <div>
+        <div className="title">
+          <h2>Menu</h2>
+        </div>
+        <hr />
+        <ul>
+          <Link to="/">
+            <li>Início</li>
+          </Link>
+          <hr />
+          <Link to="/vehicles">
+            <li>Veículos</li>
+          </Link>
+          <hr />
+          <Link to="/submitvehicle">
+            <li>Cadastrar Veículo</li>
+          </Link>
+        </ul>
+        <hr />
+        <h4>Funcionários</h4>
+        <hr />
+        <ul>
+          <Link to="/staff">
+            <li>Staff</li>
+          </Link>
+          <hr />
+          <Link to="/shifts">
+            <li>Turnos</li>
+          </Link>
+          <hr />
+          <Link to="/birthdays">
+            <li>Aniversários</li>
+          </Link>
+        </ul>
+        <hr />
+        <ul>
+          <Link to="/accounts">
+            <li>Fechar o dia</li>
+          </Link>
+          <hr />
+
+          <li onClick={btnHandler}>Sair</li>
+        </ul>
       </div>
-      <hr />
-      <ul>
-        <Link to="/">
-          <li>Início</li>
-        </Link>
-        <hr />
-        <Link to="/vehicles">
-          <li>Veículos</li>
-        </Link>
-        <hr />
-        <Link to="/submitvehicle">
-          <li>Cadastrar Veículo</li>
-        </Link>
-      </ul>
-      <hr />
-      <h4>Funcionários</h4>
-      <hr />
-      <ul>
-        <Link to="/staff">
-          <li>Staff</li>
-        </Link>
-        <hr />
-        <Link to="/shifts">
-          <li>Turnos</li>
-        </Link>
-        <hr />
-        <Link to="/birthdays">
-          <li>Aniversários</li>
-        </Link>
-      </ul>
-      <hr />
-      <ul>
-        <Link to="/accounts">
-          <li>Fechar o dia</li>
-        </Link>
-        <hr />
-        <Link to="/starter">
-          <li>Sair</li>
-        </Link>
-      </ul>
     </Wrapper>
   );
 };

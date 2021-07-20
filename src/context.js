@@ -4,7 +4,7 @@ import { localdata } from "./utils";
 
 import {
   START_LOADING,
-  STOPT_LOADING,
+  STOP_LOADING,
   GET_VEHICLES_START,
   GET_VEHICLES_SUCCESS,
   GET_SINGLE_VEHICLE_START,
@@ -12,6 +12,8 @@ import {
   GETTING_NAME,
   GET_TOTAL_PRICE,
   SUBMIT_VEHICLE,
+  HIDE_ALL,
+  SHOW_ALL,
 } from "./action";
 
 const initialState = {
@@ -23,12 +25,29 @@ const initialState = {
     help_text: "",
   },
   free_vacancies: 56,
+  site_display: false,
 };
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const displayHandlerHide = () => {
+    dispatch({ type: HIDE_ALL });
+  };
+
+  const displayHandlerShow = () => {
+    dispatch({ type: SHOW_ALL });
+  };
+
+  const loaderHide = () => {
+    dispatch({ type: STOP_LOADING });
+  };
+
+  const loaderShow = () => {
+    dispatch({ type: START_LOADING });
+  };
 
   const getName = (title, help) => {
     dispatch({ type: GETTING_NAME, payload: { title, help } });
@@ -73,9 +92,13 @@ const AppProvider = ({ children }) => {
         getName,
         getTotalPrice,
         singleVehicle,
+        loaderHide,
+        loaderShow,
         /*  calculateVacancies,
         calculateVehicles, */
         registerVehicle,
+        displayHandlerHide,
+        displayHandlerShow,
       }}
     >
       {children}

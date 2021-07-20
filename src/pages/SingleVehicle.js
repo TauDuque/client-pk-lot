@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
-import { Logo } from "../components";
+import { Logo, Loading } from "../components";
 import { FaMotorcycle, FaCar } from "react-icons/fa";
 import { helps } from "../utils";
 
 const SingleVehicle = () => {
-  const { getName, singleVehicle, single_vehicle } = useGlobalContext();
+  const { getName, singleVehicle, single_vehicle, is_loading } =
+    useGlobalContext();
   const description = helps.find((desc) => desc.id === "SingleVehicle");
   const { title, help } = description;
   const { id } = useParams();
@@ -18,6 +19,10 @@ const SingleVehicle = () => {
   }, []);
 
   const { name, idNum, phone, type, time, singlePrice } = single_vehicle;
+
+  if (is_loading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper className="section">

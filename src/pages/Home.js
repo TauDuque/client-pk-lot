@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../context";
-import { Logo } from "../components";
+import { Logo, Loading } from "../components";
 import {
   GiCarKey,
   GiFullMotorcycleHelmet,
@@ -10,7 +10,14 @@ import {
 import { helps } from "../utils";
 
 const Home = () => {
-  const { getName, free_vacancies, vehicles } = useGlobalContext();
+  const {
+    getName,
+    free_vacancies,
+    vehicles,
+    is_loading,
+    loaderHide,
+    displayHandlerShow,
+  } = useGlobalContext();
   const description = helps.find((desc) => desc.id === "Home");
   const { title, help } = description;
 
@@ -18,10 +25,20 @@ const Home = () => {
   const motoTotal = vehicles.length - carTotal.length;
 
   useEffect(() => {
-    getName(title, help);
+    displayHandlerShow();
   }, []);
 
-  console.log(vehicles.length);
+  useEffect(() => {
+    getName(title, help);
+
+    setTimeout(() => {
+      loaderHide();
+    }, 2000);
+  }, []);
+
+  if (is_loading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper className="section">

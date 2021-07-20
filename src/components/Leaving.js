@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router";
 import { Logo, Loading } from "../components";
+import { useGlobalContext } from "../context";
 
 const OnSubmit = () => {
-  const history = useHistory();
+  const { displayHandlerHide } = useGlobalContext();
 
   useEffect(() => {
     setTimeout(() => {
-      history.push("/submitedform");
+      displayHandlerHide();
     }, 2400);
   });
 

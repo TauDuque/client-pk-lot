@@ -41,6 +41,7 @@ const Wrapper = styled.section`
     bottom: 17px;
     position: absolute;
   }
+
   .menu-icon {
     display: block;
   }

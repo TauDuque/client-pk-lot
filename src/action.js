@@ -17,3 +17,6 @@ export const CALCULATE_VACANCIES = "CALCULATE_VACANCIES";
 export const CALCULATE_VEHICLES = "CALCULATE_VEHICLES";
 // submit vehicle to array
 export const SUBMIT_VEHICLE = "SUBMIT_VEHICLE";
+// handling page changes
+export const HIDE_ALL = "HIDE_ALL";
+export const SHOW_ALL = "SHOW_ALL";
