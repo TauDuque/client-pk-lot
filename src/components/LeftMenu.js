@@ -11,14 +11,14 @@ const LeftMenu = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className="menu">
       <div>
         <div className="title">
           <h2>Menu</h2>
         </div>
         <hr />
         <ul>
-          <Link to="/">
+          <Link to="/home">
             <li>Início</li>
           </Link>
           <hr />
@@ -52,8 +52,9 @@ const LeftMenu = () => {
             <li>Fechar o dia</li>
           </Link>
           <hr />
-
-          <li onClick={btnHandler}>Sair</li>
+          <Link to="/leaving">
+            <li>Sair</li>
+          </Link>
         </ul>
       </div>
     </Wrapper>

@@ -5,12 +5,9 @@ import { useGlobalContext } from "../context";
 import { reducerMethod } from "../utils";
 
 const RightMenu = () => {
-  const { description, vehicles } = useGlobalContext();
+  const { description, vehicles, total_day_gain, total_month_gain } =
+    useGlobalContext();
   const { help_text } = description;
-
-  const calculateValue = vehicles.map((item) => item.singlePrice);
-
-  const finalValue = calculateValue.reduce(reducerMethod);
 
   return (
     <Wrapper className="menu">
@@ -24,7 +21,7 @@ const RightMenu = () => {
               Saldo/
               <br /> 24h
             </span>
-            <span>R${finalValue}</span>
+            <span>R${total_day_gain},00</span>
             <span>
               <img src={coins_icn} alt="ícone" />
             </span>
@@ -34,7 +31,8 @@ const RightMenu = () => {
               Saldo/ <br />
               30d
             </span>
-            <span>R${8400 + finalValue}</span>
+
+            <span>R${total_month_gain},00</span>
             <span>
               <img src={count_icn} alt="ícone" />
             </span>

@@ -25,65 +25,69 @@ function App() {
   const { site_display } = useGlobalContext();
   return (
     <div className="main-container">
-      {!site_display && (
-        <Router>
-          <Starter />
-        </Router>
-      )}
-      {site_display && (
-        <Router>
-          <Navbar />
-          <Switch>
-            <div className="container" style={{ display: "flex" }}>
-              <div className="row section-center">
+      <Router>
+        <Navbar />
+        <Switch>
+          <div className="container" style={{ display: "flex" }}>
+            <div
+              className={
+                site_display ? "row section-center" : "row section-center no-bg"
+              }
+            >
+              {site_display && (
                 <div className="col ">
                   <LeftMenu />
                 </div>
-                <div className="col-6  ">
-                  <Route exact path="/">
-                    <Home />
-                  </Route>
-                  <Route exact path="/accounts">
-                    <Accounts />
-                  </Route>
-                  <Route exact path="/shifts">
-                    <Shifts />
-                  </Route>
-                  <Route exact path="/birthdays">
-                    <Birthdays />
-                  </Route>
-                  <Route exact path="/vehicles">
-                    <Vehicles />
-                  </Route>
-                  <Route
-                    extac
-                    path="/vehicles/:id"
-                    children={<SingleVehicle />}
-                  />
-                  <Route exact path="/staff">
-                    <Staff />
-                  </Route>
-                  <Route exact path="/submitvehicle">
-                    <SubmitVehicle />
-                  </Route>
-                  <Route exact path="/onsubmit">
-                    <OnSubmit />
-                  </Route>
-                  <Route exact path="/submitedform">
-                    <SubmitedForm />
-                  </Route>
-                  <Route extac path="/leaving">
-                    <Leaving />
-                  </Route>
-                </div>
-                <div className="col" style={{ paddingRight: "0" }}>
-                  <RightMenu className={site_display ? "hide" : null} />
-                </div>
+              )}
+              <div className="col-6  ">
+                <Route exact path="/home">
+                  <Home />
+                </Route>
+                <Route exact path="/accounts">
+                  <Accounts />
+                </Route>
+                <Route exact path="/shifts">
+                  <Shifts />
+                </Route>
+                <Route exact path="/birthdays">
+                  <Birthdays />
+                </Route>
+                <Route exact path="/vehicles">
+                  <Vehicles />
+                </Route>
+                <Route
+                  extac
+                  path="/vehicles/:id"
+                  children={<SingleVehicle />}
+                />
+                <Route exact path="/staff">
+                  <Staff />
+                </Route>
+                <Route exact path="/submitvehicle">
+                  <SubmitVehicle />
+                </Route>
+                <Route exact path="/onsubmit">
+                  <OnSubmit />
+                </Route>
+                <Route exact path="/submitedform">
+                  <SubmitedForm />
+                </Route>
+                <Route extac path="/leaving">
+                  <Leaving />
+                </Route>
               </div>
+              {site_display && (
+                <div className="col" style={{ paddingRight: "0" }}>
+                  <RightMenu />
+                </div>
+              )}
+              <Route exact path="/">
+                <Starter />
+              </Route>
             </div>
-          </Switch>
-        </Router>
-      )}
+          </div>
+        </Switch>
+      </Router>
     </div>
   );
 }

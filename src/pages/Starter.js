@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AliceCarousel from "react-alice-carousel";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useGlobalContext } from "../context";
 import "react-alice-carousel/lib/alice-carousel.css";
 import {
@@ -15,9 +15,10 @@ import {
 } from "../assets";
 
 const Starter = () => {
-  const { loaderShow, displayHandlerHide, displayHandlerShow } =
+  const { loaderShow, displayHandlerHide, displayHandlerShow, getName } =
     useGlobalContext();
   const [width, setWidth] = useState(true);
+  const history = useHistory();
   const items = [
     <img src={pklot_1} alt="estacionamento" />,
     <img src={pklot_2} alt="estacionamento" />,
@@ -26,6 +27,11 @@ const Starter = () => {
     <img src={pklot_5} alt="estacionamento" />,
     <img src={pklot_6} alt="estacionamento" />,
   ];
+
+  useEffect(() => {
+    displayHandlerHide();
+    getName("Bem-vindo", "");
+  }, []);
 
   function widthHandler() {
     if (window.innerWidth < 992) {
@@ -42,13 +48,11 @@ const Starter = () => {
   function btnHandler() {
     loaderShow();
     displayHandlerShow();
+    history.push("/home");
   }
 
   return (
-    <Wrapper>
-      <div>
-        <h2>Bem-vindo</h2>
-      </div>
+    <Wrapper className="section section-center">
       {width && (
         <AliceCarousel
           items={items}
@@ -67,27 +71,27 @@ const Starter = () => {
         </div>
       )}
       <div className="access-btn">
-        <Link to="/">
-          <button
-            className="effect box-fill-skew"
-            type="button"
-            onClick={() => btnHandler()}
-          >
-            Acessar
-          </button>
-        </Link>
+        <button
+          className="effect box-fill-skew"
+          type="button"
+          onClick={() => btnHandler()}
+        >
+          Acessar
+        </button>
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
-  height: 54vh;
-  width: 50vw;
+  height: 590px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: transparent;
+
   h2 {
     display: flex;
     margin-top: 8px;
@@ -96,8 +100,8 @@ const Wrapper = styled.section`
   }
 
   img {
-    height: 350px;
-    width: 100%;
+    height: 540px;
+    width: 250px;
   }
   .mobile {
     display: block;
@@ -107,7 +111,7 @@ const Wrapper = styled.section`
   }
 
   @media (min-width: 992px) {
-    height: 92vh;
+    height: 85vh;
     width: 50vw;
     justify-content: flex-end;
     position: relative;

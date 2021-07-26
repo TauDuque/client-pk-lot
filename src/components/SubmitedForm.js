@@ -23,7 +23,7 @@ const SubmitedForm = () => {
           <GiConfirmed className="icon" />
         </div>
         <div className="submit-btn">
-          <Link to="/">
+          <Link to="/home">
             <button
               type="submit"
               className="effect box-fill-skew"

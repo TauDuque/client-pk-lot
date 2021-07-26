@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { helps, paginate } from "../utils";
 
 const Vehicles = () => {
-  const { getName, vehicles } = useGlobalContext();
+  const { getName, vehicles, fetchData } = useGlobalContext();
   const description = helps.find((desc) => desc.id === "Vehicles");
   const { title, help } = description;
   const [page, setPage] = useState(0);
@@ -29,6 +29,7 @@ const Vehicles = () => {
 
   useEffect(() => {
     getName(title, help);
+    fetchData();
   }, []);
 
   if (!data) {
@@ -45,21 +46,21 @@ const Vehicles = () => {
                 <th>identidade</th>
                 <th>contato</th>
                 <th>veículo</th>
-                <th>tempo</th>
+                <th>horas</th>
                 <th>preço</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item, index) => {
-                const { id, name, idNum, phone, type, time, singlePrice } =
+                const { id, nome, id_num, phone, type, time, single_price } =
                   item;
                 return (
                   <tr key={index}>
                     <td>
-                      <Link to={`/vehicles/${id}`}>{name}</Link>
+                      <Link to={`/vehicles/${id}`}>{nome}</Link>
                     </td>
                     <td>
-                      <Link to={`/vehicles/${id}`}>{idNum}</Link>
+                      <Link to={`/vehicles/${id}`}>{id_num}</Link>
                     </td>
                     <td>
                       <Link to={`/vehicles/${id}`}>{phone}</Link>
@@ -71,7 +72,7 @@ const Vehicles = () => {
                       <Link to={`/vehicles/${id}`}>{time}</Link>
                     </td>
                     <td>
-                      <Link to={`/vehicles/${id}`}>{singlePrice}</Link>
+                      <Link to={`/vehicles/${id}`}>{single_price}</Link>
                     </td>
                   </tr>
                 );
@@ -94,22 +95,25 @@ const Vehicles = () => {
 const Wrapper = styled.section`
   .vehicles-info {
     text-transform: capitalize;
-    width: 100%;
+    width: 345px;
     min-height: 225px;
   }
   table {
     border: 1px solid var(--light-black);
     padding: 2px;
-    width: 100%;
+    width: 345px;
   }
   a {
     color: var(--mid-black);
   }
+  th {
+    font-size: 10px;
+  }
 
   td {
     border: 1px solid var(--grey-metal);
-    font-size: 12px;
-    padding: 5px;
+    font-size: 9px;
+    padding: 2px;
     cursor: pointer;
   }
   td:hover {
@@ -137,6 +141,32 @@ const Wrapper = styled.section`
     border: 1px solid var(--light-black);
   }
   @media (min-width: 992px) {
+    .vehicles-info {
+      width: 100%;
+      min-height: 225px;
+    }
+    table {
+      padding: 2px;
+      width: 100%;
+    }
+
+    td {
+      font-size: 12px;
+      padding: 5px;
+    }
+
+    .table-btn {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+      justify-content: center;
+    }
+
+    .table-btn button {
+      width: 45px;
+      align-items: center;
+      padding: 3px;
+    }
   }
 `;
 

@@ -7,6 +7,7 @@ import Staff from "./Staff";
 import Starter from "./Starter";
 import Vehicles from "./Vehicles";
 import SingleVehicle from "./SingleVehicle";
+import MainPage from "./MainPage";
 
 export {
   Accounts,
@@ -18,4 +19,5 @@ export {
   Starter,
   Vehicles,
   SingleVehicle,
+  MainPage,
 };

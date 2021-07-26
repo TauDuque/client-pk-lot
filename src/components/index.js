@@ -6,6 +6,7 @@ import Logo from "./Logo";
 import OnSubmit from "./OnSubmit";
 import SubmitedForm from "./SubmitedForm";
 import Leaving from "./Leaving";
+import RegisterConfirm from "./RegisterConfirm";
 
 export {
   LeftMenu,
@@ -16,4 +17,5 @@ export {
   OnSubmit,
   SubmitedForm,
   Leaving,
+  RegisterConfirm,
 };

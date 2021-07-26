@@ -7,18 +7,21 @@ import { FaMotorcycle, FaCar } from "react-icons/fa";
 import { helps } from "../utils";
 
 const SingleVehicle = () => {
-  const { getName, singleVehicle, single_vehicle, is_loading } =
+  const { getName, fetchSingleVehicle, single_vehicle, is_loading } =
     useGlobalContext();
   const description = helps.find((desc) => desc.id === "SingleVehicle");
   const { title, help } = description;
   const { id } = useParams();
 
   useEffect(() => {
+    fetchSingleVehicle(id);
+  }, [id]);
+
+  useEffect(() => {
     getName(title, help);
-    singleVehicle(id);
   }, []);
 
-  const { name, idNum, phone, type, time, singlePrice } = single_vehicle;
+  const { nome, id_num, phone, type, time, single_price } = single_vehicle;
 
   if (is_loading) {
     return <Loading />;
@@ -35,11 +38,11 @@ const SingleVehicle = () => {
         )}
         <div className=" col-info">
           <span>cliente:</span>
-          <h4>{name}</h4>
+          <h4>{nome}</h4>
         </div>
         <div className="col-info">
           <span>Identidade:</span>
-          <h4>{idNum}</h4>
+          <h4>{id_num}</h4>
         </div>
         <div className="col-info">
           <span>contato:</span>
@@ -50,12 +53,12 @@ const SingleVehicle = () => {
           <h4>{type}</h4>
         </div>
         <div className="col-info">
-          <span>tempo:</span>
+          <span>horas:</span>
           <h4>{time}</h4>
         </div>
         <div className="col-info">
           <span>preço:</span>
-          <h4>{singlePrice}</h4>
+          <h4>{single_price}</h4>
         </div>
         <div className="submit-btn">
           <Link to="/vehicles">

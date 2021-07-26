@@ -6,11 +6,7 @@ import { Logo } from "../components";
 import { helps, getSinglePrice, generateId } from "../utils";
 
 const SubmitVehicle = () => {
-  const {
-    getName,
-
-    registerVehicle,
-  } = useGlobalContext();
+  const { getName, registerVehicle, api } = useGlobalContext();
   const description = helps.find((desc) => desc.id === "SubmitVehicle");
   const { title, help } = description;
   const history = useHistory();
@@ -25,7 +21,7 @@ const SubmitVehicle = () => {
   const [type, setType] = useState("");
   const [time, setTime] = useState("");
 
-  function submitHandler(e) {
+  async function submitHandler(e) {
     e.preventDefault();
     if (
       name === "" ||
@@ -37,42 +33,18 @@ const SubmitVehicle = () => {
       return alert("Favor preencher todos os campos!");
     } else {
       const singlePrice = getSinglePrice(type, time);
-
-      const id = generateId();
-      registerVehicle(id, name, idNum, phone, type, time, singlePrice);
-
+      const data = {
+        nome: name,
+        id_num: idNum,
+        phone: phone,
+        type: type,
+        time: time,
+        single_price: singlePrice,
+      };
+      const newData = await api.post("vehicles", data);
       history.push("/onsubmit");
     }
   }
-
-  /*   function getPrice() {
-    const carPrice = 20;
-    const carHour = 8;
-    const motoPrice = 10;
-    const motoHour = 4;
-    if (type === "carro" && time == 1) {
-      let firstPrice = carPrice;
-      let secondPrice = 0;
-      getTotalPrice(firstPrice, secondPrice);
-    }
-    if (type === "carro" && time > 1) {
-      let firstPrice = carPrice;
-      const counting = time * carHour;
-      let secondPrice = counting - carHour;
-      getTotalPrice(firstPrice, secondPrice);
-    }
-    if (type === "moto" && time == 1) {
-      let firstPrice = motoPrice;
-      let secondPrice = 0;
-      getTotalPrice(firstPrice, secondPrice);
-    }
-    if (type === "moto" && time > 1) {
-      let firstPrice = motoPrice;
-      const counting = time * motoHour;
-      let secondPrice = counting - motoHour;
-      getTotalPrice(firstPrice, secondPrice);
-    }
-  } */
 
   return (
     <Wrapper className="section">
@@ -115,7 +87,7 @@ const SubmitVehicle = () => {
           <div className="form-group row m-4">
             <div
               className="form-check form-check-inline col"
-              style={{ marginLeft: "120px" }}
+              /* style={{ marginLeft: "120px" }} */
             >
               <input
                 className="form-check-input"
@@ -180,6 +152,7 @@ const Wrapper = styled.section`
     align-items: center;
     width: 100%;
   }
+
   .time-form label {
     padding-right: 18px;
     align-self: center;
@@ -192,6 +165,9 @@ const Wrapper = styled.section`
   }
 
   @media (min-width: 992px) {
+    .form-check {
+      margin-left: 120px;
+    }
   }
 `;
 

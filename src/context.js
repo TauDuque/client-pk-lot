@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useReducer } from "react";
 import reducer from "./reducer";
-import { localdata } from "./utils";
+import axios from "axios";
 
 import {
   START_LOADING,
@@ -9,8 +9,11 @@ import {
   GET_VEHICLES_SUCCESS,
   GET_SINGLE_VEHICLE_START,
   GET_SINGLE_VEHICLE_SUCCESS,
+  GAINS_DATA_START,
+  GAINS_DATA_SUCCESS,
   GETTING_NAME,
   GET_TOTAL_PRICE,
+  GET_MONTH_VALUE,
   SUBMIT_VEHICLE,
   HIDE_ALL,
   SHOW_ALL,
@@ -18,20 +21,27 @@ import {
 
 const initialState = {
   is_loading: false,
-  vehicles: localdata,
+  vehicles: [],
   single_vehicle: {},
   description: {
     current_name: "",
     help_text: "",
   },
   free_vacancies: 56,
-  site_display: false,
+  site_display: true,
+  total_day_gain: 0,
+  gains: [],
+  total_month_gain: 0,
 };
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const api = axios.create({
+    baseURL: "https://parking-lot-app-back-end.herokuapp.com/",
+  });
 
   const displayHandlerHide = () => {
     dispatch({ type: HIDE_ALL });
@@ -53,52 +63,102 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GETTING_NAME, payload: { title, help } });
   };
 
-  const getTotalPrice = (firstPrice, secondPrice) => {
-    dispatch({
-      type: GET_TOTAL_PRICE,
-      payload: { firstPrice, secondPrice },
-    });
-  };
-
-  /* const calculateVacancies = (occupied) => {
-    dispatch({ type: CALCULATE_VACANCIES, payload: { occupied } });
-  };
-
-  const calculateVehicles = (value) => {
-    dispatch({ type: CALCULATE_VEHICLES, payload: value });
-  }; */
-
-  const registerVehicle = (id, name, idNum, phone, type, time, singlePrice) => {
+  const registerVehicle = (
+    id,
+    nome,
+    id_num,
+    phone,
+    type,
+    time,
+    single_price
+  ) => {
     dispatch({
       type: SUBMIT_VEHICLE,
-      payload: { id, name, idNum, phone, type, time, singlePrice },
+      payload: { id, nome, id_num, phone, type, time, single_price },
     });
   };
 
-  const singleVehicle = (id) => {
+  const fetchData = async () => {
     dispatch({ type: GET_VEHICLES_START });
     try {
-      const singleData = localdata;
-      dispatch({ type: GET_VEHICLES_SUCCESS, payload: { id, singleData } });
+      const response = await api.get("vehicles");
+      const vehicles = await response.data;
+      dispatch({ type: GET_VEHICLES_SUCCESS, payload: vehicles });
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getTotalValueDay = async () => {
+    try {
+      const response = await api.get("vehicles");
+      const vehicles = await response.data;
+      const value = vehicles.map((item) => parseInt(item.single_price));
+      console.log(value);
+      dispatch({ type: GET_TOTAL_PRICE, payload: value });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchGainData = async () => {
+    dispatch({ type: GAINS_DATA_START });
+    try {
+      const response = await api.get("gains");
+      const gains = await response.data;
+      dispatch({ type: GAINS_DATA_SUCCESS, payload: gains });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getTotalValueMonth = async () => {
+    try {
+      const response = await api.get("gains");
+      const gains = await response.data;
+      const monthValue = gains.map((item) => parseInt(item.valor));
+      dispatch({ type: GET_MONTH_VALUE, payload: monthValue });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchSingleVehicle = async (id) => {
+    dispatch({ type: GET_SINGLE_VEHICLE_START });
+    try {
+      const response = await api.get("vehicles");
+      const singleData = await response.data;
+      dispatch({
+        type: GET_SINGLE_VEHICLE_SUCCESS,
+        payload: { singleData, id },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    fetchGainData();
+    getTotalValueDay();
+    getTotalValueMonth();
+  }, []);
 
   return (
     <AppContext.Provider
       value={{
         ...state,
         getName,
-        getTotalPrice,
-        singleVehicle,
+        fetchSingleVehicle,
         loaderHide,
         loaderShow,
-        /*  calculateVacancies,
-        calculateVehicles, */
         registerVehicle,
         displayHandlerHide,
         displayHandlerShow,
+        fetchData,
+        getTotalValueDay,
+        getTotalValueMonth,
+        api,
       }}
     >
       {children}

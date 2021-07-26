@@ -33,17 +33,22 @@ const Navbar = () => {
 
 const Wrapper = styled.section`
   color: var(--white-clr-1);
-  height: 65px;
-  margin-top: 8px;
-  width: 75%;
+  height: 10px;
+  margin-top: 50px;
+
   .logo {
     font-size: 48px;
-    bottom: 17px;
+    top: -30px;
+    left: 90px;
     position: absolute;
   }
 
   .menu-icon {
     display: block;
+    position: absolute;
+    right: 90px;
+    bottom: -25px;
+    font-size: 35px;
   }
   .current-name {
     display: none;
@@ -52,13 +57,16 @@ const Wrapper = styled.section`
     display: none;
   }
   ul {
+    width: 414px;
     display: flex;
     position: relative;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   @media (min-width: 992px) {
     width: 69%;
+    height: 65px;
+    margin-top: 8px;
     margin-left: 25px;
     ul {
       display: flex;
@@ -66,6 +74,11 @@ const Wrapper = styled.section`
       justify-content: space-between;
       padding-top: 15px;
       padding-left: 0;
+      width: 100%;
+    }
+    .logo {
+      top: 5px;
+      left: 25px;
     }
     .menu-icon {
       display: none;
